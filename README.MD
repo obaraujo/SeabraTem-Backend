@@ -1,54 +1,22 @@
-# Usuário
+# Regras gerais do funcionamento da Seabra Tem
 
-> ### **[Requisitos e regras de negócio](./base/user.md)**
->
-> ### **[Requisitos e regras de negócio](./base/user.md)**
+- [ ] Deve ser possível usuários se cadastrarem [Requisitos e regras](./context/user.md).
+- [ ] Deve ser possível realizar avaliações dos negócios [Requisitos e regras](./context/rating.md).
+- [ ] O usuário deverá contratar um plano para se tornar **st-admin** [Requisitos e regras](./context/plans.md).
+- [ ] Mesmo tendo um plano contratado específico, a empresa poderá fazer upgrades [Requisitos e regras](./context/upgrades-plans.md).
+- [ ] Deve ser possível o usuário **st-admin** cadastrar negócios [Requisitos e regras](./context/business.md).
+- [ ] Deve ser possível o usuário **st-admin** cadastrar produtos [Requisitos e regras](./context/products.md).
+- [ ] Deve ser possível o usuário **st-admin** ver seus analytics [Requisitos e regras](./context/analytics.md).
 
-## Cadastro
+# API Seabra Tem
 
-### Requisição
+## Negócios
 
-`/wp-json/api/v1/user/create`
+## Produtos
 
-```json
-{
-  "first_name": "Nome",
-  "last_name": "Sobrenome",
-  "username": "obaraujo",
-  "user_pass": "obaraujo",
-  "user_email": "baraujo@stagon.in"
-}
-```
+### **Cadastro**
 
-### Resposta
-
-# Atualização de Usuário
-
-`/wp-json/api/v1/user`
-
-```json
-{
-  "first_name": "Nome",
-  "last_name": "Sobrenome",
-  "nickname": "Apelido",
-  "user_email": "seu@email.aqui",
-  "user_pass": "senha",
-  "description": "A descrição vai aqui"
-}
-```
-
-# Gerar toke
-
-`/wp-json/jwt-auth/v1/token`
-
-```json
-{
-  "username": "obaraujo",
-  "password": "obaraujo"
-}
-```
-
-# Cadastro de Produto
+_Requisição_
 
 `/wp-json/api/v1/product`
 
@@ -57,5 +25,13 @@
   "name": "Nome",
   "description": "Sobrenome",
   "price": "15.99"
+}
+```
+
+_Resposta_
+
+```json
+{
+  "message": "mes"
 }
 ```

@@ -31,9 +31,9 @@ if (!class_exists('SeabraTem')) {
     {
       $this->define_constants();
       require_once(ST_PATH . 'functions.php');
-      require_once(ST_PATH . 'custom-post-type/products.php');
+      require_once(ST_PATH . 'core/products.php');
       $ST_Products = new ST_products();
-      require_once(ST_PATH . 'custom-post-type/business.php');
+      require_once(ST_PATH . 'core/business.php');
       $ST_business = new ST_business();
       require_once(ST_PATH . 'api/users.php');
       $ST_users = new ST_Users();

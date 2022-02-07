@@ -1,4 +1,12 @@
-# Cadastro de Usuário
+# Usuário
+
+> ### **[Requisitos e regras de negócio](./base/user.md)**
+>
+> ### **[Requisitos e regras de negócio](./base/user.md)**
+
+## Cadastro
+
+### Requisição
 
 `/wp-json/api/v1/user/create`
 
@@ -11,6 +19,8 @@
   "user_email": "baraujo@stagon.in"
 }
 ```
+
+### Resposta
 
 # Atualização de Usuário
 

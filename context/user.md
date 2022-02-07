@@ -382,7 +382,7 @@ _Resposta_
 
 _Requisição_
 
-> POST `/wp-json/api/v1/user`
+> DELETE `/wp-json/api/v1/user`
 
 ```js
 const headers = new Headers({

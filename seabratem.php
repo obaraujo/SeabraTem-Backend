@@ -31,14 +31,19 @@ if (!class_exists('SeabraTem')) {
     {
       $this->define_constants();
       require_once(ST_PATH . 'functions.php');
+      require_once(ST_PATH . 'functions/category.php');
+      require_once(ST_PATH . 'functions/business.php');
+      require_once(ST_PATH . 'functions/product.php');
       require_once(ST_PATH . 'core/products.php');
       $ST_Products = new ST_products();
       require_once(ST_PATH . 'core/business.php');
       $ST_business = new ST_business();
       require_once(ST_PATH . 'api/users.php');
-      $ST_users = new ST_Users();
-      require_once(ST_PATH . 'api/products.php');
-      $ST_ProductsAPI = new ST_ProductsAPI();
+      $ST_users = new ST_users();
+      require_once(ST_PATH . 'api/business.php');
+      $ST_businessAPI = new ST_businessAPI();
+      require_once(ST_PATH . 'api/category.php');
+      $ST_categoryAPI = new ST_categoryAPI();
     }
 
     public function define_constants()

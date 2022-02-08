@@ -1,6 +1,6 @@
 <?php
 
-class ST_Users
+class ST_users
 {
   function __construct()
   {
@@ -11,32 +11,43 @@ class ST_Users
   {
     register_rest_route('api/v1', '/user/create', [
       'methods' => WP_REST_Server::CREATABLE,
-      'callback' =>  [$this, 'create']
+      'callback' =>  [$this, 'create'],
+      'permission_callback' => function ($request) {
+        return is_valid_origin($request);
+      }
     ]);
     register_rest_route('api/v1', '/user', [
       'methods' => WP_REST_Server::EDITABLE,
-      'callback' =>  [$this, 'update']
+      'callback' =>  [$this, 'update'],
+      'permission_callback' => function ($request) {
+        return is_valid_origin($request);
+      }
     ]);
     register_rest_route('api/v1', '/user/pass', [
       'methods' => WP_REST_Server::EDITABLE,
-      'callback' =>  [$this, 'update_pass']
+      'callback' =>  [$this, 'update_pass'],
+      'permission_callback' => function ($request) {
+        return is_valid_origin($request);
+      }
     ]);
     register_rest_route('api/v1', '/user', [
       'methods' => WP_REST_Server::READABLE,
-      'callback' =>  [$this, 'get']
+      'callback' =>  [$this, 'get'],
+      'permission_callback' => function ($request) {
+        return is_valid_origin($request);
+      }
     ]);
     register_rest_route('api/v1', '/user', [
       'methods' => WP_REST_Server::DELETABLE,
-      'callback' =>  [$this, 'delete']
+      'callback' =>  [$this, 'delete'],
+      'permission_callback' => function ($request) {
+        return is_valid_origin($request);
+      }
     ]);
   }
 
   public function create($request)
   {
-    if (!is_valid_origin($request)) {
-      return message_access_not_allowed();
-    }
-
     $firstname = sanitize_text_field($request['first_name']);
     $lastname = sanitize_text_field($request['last_name']);
     $email = sanitize_email($request['user_email']);
@@ -80,10 +91,6 @@ class ST_Users
 
   public function get($request)
   {
-    if (!is_valid_origin($request)) {
-      return message_access_not_allowed();
-    }
-
     $user = wp_get_current_user();
     $usermeta = get_user_meta($user->ID);
 
@@ -101,22 +108,20 @@ class ST_Users
 
   public function update($request)
   {
-    if (!is_valid_origin($request)) {
-      return message_access_not_allowed();
-    }
-
     $user = wp_get_current_user();
     $id_user = $user->ID;
 
     $userdata = ['ID' => $id_user];
     $userdata = add_in_array_if_is_not_empty($userdata, "first_name", sanitize_text_field($request['first_name']));
     $userdata = add_in_array_if_is_not_empty($userdata, "last_name", sanitize_text_field($request['last_name']));
+    $userdata = add_in_array_if_is_not_empty($userdata, "display_name", sanitize_text_field($request['display_name']));
     $userdata = add_in_array_if_is_not_empty($userdata, "nickname", sanitize_text_field($request['nickname']));
     $userdata = add_in_array_if_is_not_empty($userdata, "user_email", sanitize_email($request['user_email']));
     $userdata = add_in_array_if_is_not_empty($userdata, "description", sanitize_text_field($request['description']));
 
     wp_update_user($userdata);
 
+    $user = wp_get_current_user();
 
     $response = [
       "success" => true,
@@ -132,10 +137,6 @@ class ST_Users
 
   public function update_pass($request)
   {
-    if (!is_valid_origin($request)) {
-      return message_access_not_allowed();
-    }
-
     $user = wp_get_current_user();
     $id_user = $user->ID;
 
@@ -164,15 +165,15 @@ class ST_Users
 
   public function delete($request)
   {
-    if (!is_valid_origin($request)) {
-      return message_access_not_allowed();
-    }
-
     $user = wp_get_current_user();
     $id_user = $user->ID;
-    require_once(ABSPATH . 'wp-admin/includes/user.php');
 
-    $result = wp_delete_user($id_user);
+    delete_all_categorys();
+    delete_all_business();
+    delete_all_products();
+
+    require_once(ABSPATH . 'wp-admin/includes/user.php');
+    wp_delete_user($id_user);
     $response = [
       "success" => true,
       "message" => "Pronto o usuário $user->user_login foi deletado!",

@@ -18,7 +18,8 @@ class ST_products
       'rewrite' => ['slug' => 'produto'],
       'query_var' => true,
       'supports' => ['custom-fields', 'author', 'title'],
-      'publicly_queryable' => true
+      'publicly_queryable' => true,
+      'hierarchical' => true,
     ]);
   }
 }

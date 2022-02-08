@@ -26,6 +26,22 @@ function check_is_invalid_password($password)
 
   return false;
 }
+function check_is_invalid_text($text, $max, $min, $code)
+{
+  if (empty($text)) {
+    return new WP_Error($code, 'O valor enviado está vazio!', ['status' => 401]);
+  }
+
+  if (strlen($text) < $min) {
+    return new WP_Error($code, 'O valor enviado é curto demais!', ['status' => 401, 'min' => $min, 'max' => $max]);
+  }
+
+  if (strlen($text) > $max) {
+    return new WP_Error($code, 'O valor enviado é longo demais!', ['status' => 401, 'min' => $min, 'max' => $max]);
+  }
+
+  return false;
+}
 
 function add_in_array_if_is_not_empty($array, $key, $value)
 {
@@ -57,7 +73,7 @@ add_action('jwt_auth_expire', function () {
 add_filter('jwt_auth_default_whitelist', function ($default_whitelist) {
   // Modify the $default_whitelist here.
   $default_whitelist = [
-    '/wp-json/api/v1/user/create'
+    '/wp-json/api/v1/user/create',
   ];
   return $default_whitelist;
 });

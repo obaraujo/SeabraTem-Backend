@@ -6,7 +6,8 @@ Essa parte da API foi projetada para suportar qualquer tipo das chamadas taxonom
 
 - [x] Deve ser possível criar categorias
 - [x] Deve ser possível editar categorias
-- [ ] Deve ser possível resgatar todas as Categorias
+- [x] Deve ser possível resgatar uma Categoria
+- [x] Deve ser possível resgatar todas as Categorias
 - [x] Deve ser possível apagar categorias
 
 ## Regras de Negócio
@@ -141,11 +142,11 @@ _Resposta_
 }
 ```
 
-### **Cadastro**
+### **Atualização**
 
 _Requisição_
 
-> POST `/wp-json/api/v1/category/create`
+> POST `/wp-json/api/v1/category`
 
 ```json
 {

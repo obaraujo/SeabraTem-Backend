@@ -19,3 +19,25 @@ function delete_all_categorys()
     delete_term_meta($data->term_id, 'author_id');
   }
 }
+
+function st_get_category($args_search)
+{
+  $terms = get_terms($args_search);
+
+  if (empty($terms)) {
+    return new WP_Error('category_not_exists', 'A categoria buscada não foi encontrada!', ['status' => 401]);
+  }
+  $response = [];
+  foreach ($terms as $term => $data) {
+    $response[$data->slug] = [
+      'term_id' => $data->term_id,
+      'name' => $data->name,
+      'slug' => $data->slug,
+      'description' => $data->description,
+      'parent' => $data->parent,
+      'count' => $data->count,
+    ];
+  }
+
+  return $response;
+}

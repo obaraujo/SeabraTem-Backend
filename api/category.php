@@ -29,6 +29,20 @@ class ST_categoryAPI
         return is_valid_origin($request);
       }
     ]);
+    register_rest_route('api/v1', '/category', [
+      'methods' => WP_REST_Server::READABLE,
+      'callback' =>  [$this, 'all_get'],
+      'permission_callback' => function ($request) {
+        return is_valid_origin($request);
+      }
+    ]);
+    register_rest_route('api/v1', '/category/(?P<taxonomy>[\w]+)/(?P<term_id>[\w]+)', [
+      'methods' => WP_REST_Server::READABLE,
+      'callback' =>  [$this, 'single_get'],
+      'permission_callback' => function ($request) {
+        return is_valid_origin($request);
+      }
+    ]);
     register_rest_route('api/v1', '/category/(?P<taxonomy>[\w]+)/(?P<term_id>[\w]+)', [
       'methods' => WP_REST_Server::DELETABLE,
       'callback' =>  [$this, 'delete'],
@@ -99,6 +113,21 @@ class ST_categoryAPI
     return rest_ensure_response($response);
   }
 
+  public function all_get($request)
+  {
+    $user = wp_get_current_user();
+    $user_id = $user->ID;
+    $args = [
+      'orderby' => 'term_id',
+      'meta_key' => 'author_id',
+      'meta_value' => $user_id,
+      'hide_empty' => false,
+    ];
+
+    $response = st_get_category($args);
+
+    return rest_ensure_response($response);
+  }
   public function get($request)
   {
     $taxonomy = sanitize_text_field($request['taxonomy']);
@@ -115,18 +144,36 @@ class ST_categoryAPI
       'hide_empty' => false,
     ];
 
-    $terms = get_terms($args);
-    $response = [];
-    foreach ($terms as $term => $data) {
-      $response[$data->slug] = [
-        'term_id' => $data->term_id,
-        'name' => $data->name,
-        'slug' => $data->slug,
-        'description' => $data->description,
-        'parent' => $data->parent,
-        'count' => $data->count,
-      ];
+    $response = st_get_category($args);
+
+    return rest_ensure_response($response);
+  }
+
+
+  public function single_get($request)
+  {
+    $taxonomy = sanitize_text_field($request['taxonomy']);
+    if (!taxonomy_exists($taxonomy)) {
+      return new WP_Error('taxonomy_not_valid', 'A taxonomia não existe :(', ['status' => 401]);
     }
+
+    $term_id = (int)sanitize_text_field($request['term_id']);
+    if (empty($term_id) && is_numeric($term_id)) {
+      return new WP_Error('term_ID_not_valid', 'O ID informado não  é válido', ['status' => 401]);
+    }
+
+    $user = wp_get_current_user();
+    $user_id = $user->ID;
+
+    $args = [
+      'taxonomy' => $taxonomy,
+      'term_taxonomy_id' => $term_id,
+      'meta_key' => 'author_id',
+      'meta_value' => $user_id,
+      'hide_empty' => false,
+    ];
+
+    $response = st_get_category($args);
 
     return rest_ensure_response($response);
   }

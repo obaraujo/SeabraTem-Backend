@@ -31,6 +31,7 @@ if (!class_exists('SeabraTem')) {
     {
       $this->define_constants();
       require_once(ST_PATH . 'functions.php');
+      require_once(ST_PATH . 'functions/jwt_config.php');
       require_once(ST_PATH . 'functions/category.php');
       require_once(ST_PATH . 'functions/business.php');
       require_once(ST_PATH . 'functions/product.php');

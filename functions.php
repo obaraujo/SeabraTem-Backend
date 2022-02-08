@@ -1,8 +1,8 @@
 <?php
-define("ST_REQUEST_HOST", "https://seabratem.com");
+define("ST_REQUEST_HOST", "localhost");
 function is_valid_origin($request)
 {
-  return $request->get_header('origin') === ST_REQUEST_HOST || $request->get_header('host') === 'localhost';
+  return $request->get_header('origin') === ST_REQUEST_HOST || $request->get_header('host') === ST_REQUEST_HOST;
 }
 
 function message_access_not_allowed()
@@ -26,6 +26,7 @@ function check_is_invalid_password($password)
 
   return false;
 }
+
 function check_is_invalid_text($text, $max, $min, $code)
 {
   if (empty($text)) {
@@ -65,15 +66,3 @@ function get_product_id_by_slug($slug)
 
   return array_shift($product);
 }
-
-add_action('jwt_auth_expire', function () {
-  return time() + 60 * 60 * 24;
-});
-
-add_filter('jwt_auth_default_whitelist', function ($default_whitelist) {
-  // Modify the $default_whitelist here.
-  $default_whitelist = [
-    '/wp-json/api/v1/user/create',
-  ];
-  return $default_whitelist;
-});

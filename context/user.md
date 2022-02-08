@@ -52,8 +52,8 @@ _Requisição_
 
 ```json
 {
-  "first_name": "Nome",
-  "last_name": "Sobrenome",
+  "first_name": "Vinícius",
+  "last_name": "Araújo",
   "username": "obaraujo",
   "user_pass": "obaraujo",
   "user_email": "baraujo@stagon.in"
@@ -248,7 +248,7 @@ _Resposta_
 
 _Requisição_
 
-> POST `/wp-json/api/v1/user`
+> PUT `/wp-json/api/v1/user`
 
 ```js
 const headers = new Headers({
@@ -258,11 +258,12 @@ const headers = new Headers({
 
 ```json
 {
-  "first_name": "Nome",
-  "last_name": "Sobrenome",
-  "nickname": "Apelido",
-  "user_email": "seu@email.aqui",
-  "description": "A descrição vai aqui"
+  "first_name": "Henrique",
+  "last_name": "Pires",
+  "nickname": "Pires",
+  "user_email": "pires@stagon.in",
+  "display_name": "Henrique Pires",
+  "description": "Ele é o cara do desenvolvimento pessoal!"
 }
 ```
 

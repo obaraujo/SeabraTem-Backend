@@ -4,7 +4,7 @@
  *  Seabra Tem in Wordpress
  * 
  * @package Seabra_Tem
- * @version 1.0.1
+ * @version 1.0.0
  * @package   seabratem
  * @link      https://github.com/obaraujo/seabratem
  * @author    Vinícius Araújo <baraujo@stagon.in>

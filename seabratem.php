@@ -3,8 +3,8 @@
 /**
  *  Seabra Tem in Wordpress
  * 
- * @package Seabra_Tem
- * @version 1.0.0
+ * @package   Seabra_Tem
+ * @version   1.0.0
  * @package   seabratem
  * @link      https://github.com/obaraujo/seabratem
  * @author    Vinícius Araújo <baraujo@stagon.in>
@@ -12,10 +12,10 @@
  *
  * Plugin Name: Seabra Tem Backend
  * Plugin URI: http://stagon.in/seabratem
- * Description: Plugin base da arquitetura da Seabra Tem. Responsável por servir o Backend da Seabra Tem
+ * Description: Plugin base do backend da Seabra Tem.
  * Author: Stagon | O Baraujo
  * Version: 1.0.0
- *Author URI: https://stagon.in
+ * Author URI: https://stagon.in
  * Text Domain:  seabratem
  * Domain Path:  /languages/
  * Requires PHP: 7.4

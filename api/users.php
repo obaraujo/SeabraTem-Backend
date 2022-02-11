@@ -244,6 +244,8 @@ class ST_users
 
     require_once ABSPATH . 'wp-admin/includes/user.php';
     wp_delete_user($id_user);
+    delete_user_meta($id_user, 'jwt_auth_pass');
+
     $response = [
       "success" => true,
       "message" => "Pronto o usuário $user->user_login foi deletado!",

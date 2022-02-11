@@ -9,19 +9,19 @@ class ST_ProductsAPI
 
   public function register_routes_api_product()
   {
-    register_rest_route('api/v1', '/product', [
+    register_rest_route('v1', '/product', [
       'methods' => 'POST',
       'callback' =>  [$this, 'create']
     ]);
-    register_rest_route('api/v1', '/product', [
+    register_rest_route('v1', '/product', [
       'methods' => 'PUT',
       'callback' =>  [$this, 'update']
     ]);
-    register_rest_route('api/v1', '/product/(?P<slug>[-\w]+)', [
+    register_rest_route('v1', '/product/(?P<slug>[-\w]+)', [
       'methods' => 'GET',
       'callback' =>  [$this, 'simple_get']
     ]);
-    register_rest_route('api/v1', '/product', [
+    register_rest_route('v1', '/product', [
       'methods' => 'DELETE',
       'callback' =>  [$this, 'delete']
     ]);

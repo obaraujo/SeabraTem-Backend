@@ -8,42 +8,42 @@ class ST_categoryAPI
 
   public function register_routes_api_category()
   {
-    register_rest_route('api/v1', '/category/create', [
+    register_rest_route('v1', '/category/create', [
       'methods' => WP_REST_Server::CREATABLE,
       'callback' =>  [$this, 'create'],
       'permission_callback' => function ($request) {
         return is_valid_origin($request);
       }
     ]);
-    register_rest_route('api/v1', '/category', [
+    register_rest_route('v1', '/category', [
       'methods' => WP_REST_Server::EDITABLE,
       'callback' =>  [$this, 'update'],
       'permission_callback' => function ($request) {
         return is_valid_origin($request);
       }
     ]);
-    register_rest_route('api/v1', '/category/(?P<taxonomy>[\w]+)', [
+    register_rest_route('v1', '/category/(?P<taxonomy>[\w]+)', [
       'methods' => WP_REST_Server::READABLE,
       'callback' =>  [$this, 'get'],
       'permission_callback' => function ($request) {
         return is_valid_origin($request);
       }
     ]);
-    register_rest_route('api/v1', '/category', [
+    register_rest_route('v1', '/category', [
       'methods' => WP_REST_Server::READABLE,
       'callback' =>  [$this, 'all_get'],
       'permission_callback' => function ($request) {
         return is_valid_origin($request);
       }
     ]);
-    register_rest_route('api/v1', '/category/(?P<taxonomy>[\w]+)/(?P<term_id>[\w]+)', [
+    register_rest_route('v1', '/category/(?P<taxonomy>[\w]+)/(?P<term_id>[\w]+)', [
       'methods' => WP_REST_Server::READABLE,
       'callback' =>  [$this, 'single_get'],
       'permission_callback' => function ($request) {
         return is_valid_origin($request);
       }
     ]);
-    register_rest_route('api/v1', '/category/(?P<taxonomy>[\w]+)/(?P<term_id>[\w]+)', [
+    register_rest_route('v1', '/category/(?P<taxonomy>[\w]+)/(?P<term_id>[\w]+)', [
       'methods' => WP_REST_Server::DELETABLE,
       'callback' =>  [$this, 'delete'],
       'permission_callback' => function ($request) {

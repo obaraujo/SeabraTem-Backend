@@ -9,7 +9,7 @@ class ST_users
 
   public function register_routes_api_user()
   {
-    register_rest_route('api/v1', '/user/create', [
+    register_rest_route('v1', '/user/create', [
       'methods' => WP_REST_Server::CREATABLE,
       'callback' => [$this, 'st_create_user'],
       'permission_callback' => function ($request) {
@@ -17,7 +17,7 @@ class ST_users
       },
     ]);
 
-    register_rest_route('api/v1', '/user', [
+    register_rest_route('v1', '/user', [
       'methods' => WP_REST_Server::EDITABLE,
       'callback' => [$this, 'update'],
       'permission_callback' => function ($request) {
@@ -25,15 +25,15 @@ class ST_users
       },
     ]);
 
-    register_rest_route('api/v1', '/user/login', [
-      'methods' => WP_REST_Server::EDITABLE,
+    register_rest_route('v1', '/user/login', [
+      'methods' => WP_REST_Server::CREATABLE,
       'callback' => [$this, 'st_login_user'],
       'permission_callback' => function ($request) {
         return is_valid_origin($request);
       },
     ]);
 
-    register_rest_route('api/v1', '/user/pass', [
+    register_rest_route('v1', '/user/pass', [
       'methods' => WP_REST_Server::EDITABLE,
       'callback' => [$this, 'update_pass'],
       'permission_callback' => function ($request) {
@@ -41,7 +41,7 @@ class ST_users
       },
     ]);
 
-    register_rest_route('api/v1', '/user', [
+    register_rest_route('v1', '/user', [
       'methods' => WP_REST_Server::READABLE,
       'callback' => [$this, 'st_get_informations_user'],
       'permission_callback' => function ($request) {
@@ -49,7 +49,7 @@ class ST_users
       },
     ]);
 
-    register_rest_route('api/v1', '/user', [
+    register_rest_route('v1', '/user', [
       'methods' => WP_REST_Server::DELETABLE,
       'callback' => [$this, 'delete'],
       'permission_callback' => function ($request) {

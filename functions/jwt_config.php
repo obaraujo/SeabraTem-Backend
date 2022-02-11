@@ -6,12 +6,7 @@ add_action('jwt_auth_expire', function () {
 
 
 add_filter('jwt_auth_whitelist', function ($endpoints) {
-  $your_endpoints = [
-    '/wp-json/custom/v1/webhook/*',
-    '/wp-json/custom/v1/otp/*',
-    '/wp-json/custom/v1/account/check',
-    '/wp-json/custom/v1/register',
-  ];
+  $your_endpoints = [];
 
   return array_unique(array_merge($endpoints, $your_endpoints));
 });
@@ -19,9 +14,9 @@ add_filter('jwt_auth_whitelist', function ($endpoints) {
 add_filter('jwt_auth_default_whitelist', function ($default_whitelist) {
   $default_whitelist = [
     ...$default_whitelist,
-    '/wp-json/api/v1/user/create',
-    '/wp-json/api/v1/user/login',
-    '/wp-json/api/v1/tests',
+    '/api/v1/user/create',
+    '/api/v1/user/login',
+    '/api/v1/tests',
   ];
   return $default_whitelist;
 });

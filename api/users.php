@@ -173,7 +173,7 @@ class ST_users
       'user_email' => $user->user_email,
     ];
 
-    return rest_ensure_response($_SERVER['REMOTE_ADDR']);
+    return rest_ensure_response($response);
   }
 
   public function update($request)

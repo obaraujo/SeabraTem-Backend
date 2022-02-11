@@ -1,8 +1,8 @@
 <?php
-define("ST_REQUEST_HOST", "localhost");
-function is_valid_origin($request)
+function is_valid_origin()
 {
-  return $request->get_header('origin') === ST_REQUEST_HOST || $request->get_header('host') === ST_REQUEST_HOST;
+  $server_names_permitted = ['seabratem.com', 'localhost', '127.0.0.1', '192.168.2.107'];
+  return in_array($_SERVER['SERVER_NAME'], $server_names_permitted);
 }
 
 function message_access_not_allowed()
@@ -48,4 +48,20 @@ function get_product_id_by_slug($slug)
   $product = $query->get_posts();
 
   return array_shift($product);
+}
+
+add_action('rest_api_init', 'register_routes_api_tests');
+
+
+function register_routes_api_tests()
+{
+  register_rest_route('api/v1', '/tests', [
+    'methods' => WP_REST_Server::READABLE,
+    'callback' => function ($request) {
+      return json_encode($_SERVER);
+    },
+    'permission_callback' => function () {
+      return is_valid_origin();
+    },
+  ]);
 }

@@ -21,6 +21,7 @@ add_filter('jwt_auth_default_whitelist', function ($default_whitelist) {
     ...$default_whitelist,
     '/wp-json/api/v1/user/create',
     '/wp-json/api/v1/user/login',
+    '/wp-json/api/v1/tests',
   ];
   return $default_whitelist;
 });

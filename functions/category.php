@@ -25,7 +25,7 @@ function st_get_category($args_search)
   $terms = get_terms($args_search);
 
   if (empty($terms)) {
-    return new WP_Error('category_not_exists', 'A categoria buscada não foi encontrada!', ['status' => 401]);
+    return new WP_REST_Response(null, 204);
   }
   $response = [];
   foreach ($terms as $term => $data) {

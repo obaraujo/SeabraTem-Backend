@@ -10,23 +10,6 @@ function message_access_not_allowed()
   return rest_ensure_response(new WP_Error('premission', 'Origem não autorizada!', ['status' => 401]));
 }
 
-function check_is_invalid_password($password)
-{
-  if (empty($password)) {
-    return new WP_Error('user_pass_empty', 'A senha enviada está vazia!', ['status' => 401]);
-  }
-
-  if (strlen($password) < 6) {
-    return new WP_Error('user_pass_shirt', 'A senha enviada é curta demais!', ['status' => 401, 'min' => 6, 'max' => 14]);
-  }
-
-  if (strlen($password) > 14) {
-    return new WP_Error('user_pass_long', 'A senha enviada é longa demais!', ['status' => 401, 'min' => 6, 'max' => 14]);
-  }
-
-  return false;
-}
-
 function check_is_invalid_text($text, $max, $min, $code)
 {
   if (empty($text)) {

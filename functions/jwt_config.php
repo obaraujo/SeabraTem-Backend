@@ -17,10 +17,10 @@ add_filter('jwt_auth_whitelist', function ($endpoints) {
 });
 
 add_filter('jwt_auth_default_whitelist', function ($default_whitelist) {
-  // Modify the $default_whitelist here.
   $default_whitelist = [
     ...$default_whitelist,
     '/wp-json/api/v1/user/create',
+    '/wp-json/api/v1/user/login',
   ];
   return $default_whitelist;
 });

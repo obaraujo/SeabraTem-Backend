@@ -138,7 +138,7 @@ _Resposta_
 
 _Requisição_
 
-> POST `/wp-json/jwt-auth/v1/token`
+> POST `/wp-json/api/v1/user/login`
 
 ```json
 {

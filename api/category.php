@@ -180,6 +180,9 @@ class ST_categoryAPI
 
   public function update($request)
   {
+
+    return rest_ensure_response(var_dump($request));
+
     $term = sanitize_text_field($request['term']);
     $taxonomy = sanitize_text_field($request['taxonomy']);
     if (!taxonomy_exists($taxonomy)) {

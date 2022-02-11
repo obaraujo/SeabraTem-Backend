@@ -1,5 +1,9 @@
 # Produtos
 
+## Estrutura dos dados
+
+- [ ] O post_type produto terá ativado o modo hierarquia e esse modo será usado para definir suas variações, como cor, tamanho, etc
+
 ## Requisitos
 
 - [ ] Deve possível criar um produto

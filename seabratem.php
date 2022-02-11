@@ -10,8 +10,8 @@
  * @author    Vinícius Araújo <baraujo@stagon.in>
  * @copyright 2022 Vinícius Araújo
  *
- * Plugin Name: Seabra Tem 
- * Plugin URI: http://stagon.in//seabratem
+ * Plugin Name: Seabra Tem Backend
+ * Plugin URI: http://stagon.in/seabratem
  * Description: Plugin base da arquitetura da Seabra Tem. Responsável por servir o Backend da Seabra Tem
  * Author: Stagon | O Baraujo
  * Version: 1.0.0
@@ -24,8 +24,8 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-if (!class_exists('SeabraTem')) {
-  class SeabraTem
+if (!class_exists('SeabraTemBackend')) {
+  class SeabraTemBackend
   {
     function __construct()
     {
@@ -67,9 +67,9 @@ if (!class_exists('SeabraTem')) {
   }
 }
 
-if (class_exists('SeabraTem')) {
-  register_activation_hook(__FILE__, ['SeabraTem', 'activate']);
-  register_deactivation_hook(__FILE__, ['SeabraTem', 'deactivate']);
-  register_uninstall_hook(__FILE__, ['SeabraTem', 'uninstall']);
-  $seabratem = new SeabraTem();
+if (class_exists('SeabraTemBackend')) {
+  register_activation_hook(__FILE__, ['SeabraTemBackend', 'activate']);
+  register_deactivation_hook(__FILE__, ['SeabraTemBackend', 'deactivate']);
+  register_uninstall_hook(__FILE__, ['SeabraTemBackend', 'uninstall']);
+  $SeabraTemBackend = new SeabraTemBackend();
 }

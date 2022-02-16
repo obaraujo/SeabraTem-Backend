@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token</title>
+  <style>
+    body {
+      background-color: #222;
+    }
+
+    .input {
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 600px;
+    }
+
+    input,
+    textarea {
+      width: 500px;
+      border-radius: 5px;
+      height: 40px;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    #response {
+      color: white;
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="input">
+    <textarea name="json" id="" cols="30" rows="10">
+{
+  "username": "obaraujo",
+  "password": "obaraujo"
+}</textarea>
+    <textarea name="code" id="" cols="30" rows="10"></textarea>
+  </div>
+  <div id="response"></div>
+  <button onclick="POST()">POST</button>
+  <script>
+    function POST() {
+      const value = JSON.parse(`${document.querySelector('[name="json"').value}`)
+      const form = new FormData();
+
+      for (var key in value) {
+        form.append(key, value[key]);
+      }
+      fetch(`http://localhostapi/v1/jwt-auth/v1/token`, {
+        method: 'POST',
+        body: form,
+      }).then(t => t.json()).then(data => {
+        document.querySelector('[name="code"').innerHTML = data.data.token
+        document.querySelector('[name="code"').value = data.data.token
+      })
+    }
+  </script>
+</body>
+
+</html>

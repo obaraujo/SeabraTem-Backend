@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API</title>
+  <style>
+    body {
+      background-color: #222;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .input {
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 600px;
+    }
+
+    input,
+    textarea {
+      border-radius: 5px;
+      height: 40px;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    #response {
+      display: flex;
+      color: white;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 50px;
+      gap: 5px;
+    }
+
+    select {
+      height: 50px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+  <div class="input">
+    <div class="buttons">
+      <button onclick="POST()">POST</button>
+      <button onclick="GET()">GET</button>
+      <button onclick="DELETE()">DELETE</button>
+      <button onclick="PUT()">PUT</button>
+    </div>
+    <select name="route" id="routes">
+    </select>
+    <input type="text" name="params" placeholder="params">
+    <input type="text" name="token" placeholder="Token">
+    <script>
+
+    </script>
+    <textarea name="code" id="" cols="30" rows="10"></textarea>
+    <input type="file" name="files" id="" multiple>
+  </div>
+  <pre>
+    <code id="response"></code>
+  </pre>
+
+
+  <script>
+    const route = document.querySelector('[name="route"')
+    const params = document.querySelector('[name="params"')
+    const token = document.querySelector('[name="token"')
+    const code = document.querySelector('[name="code"')
+    const input = document.querySelector('[name="files"')
+    const button = document.querySelector('button')
+
+    const value1 = JSON.parse(`{"username": "obaraujo","password": "obaraujo"}`)
+    const form = new FormData();
+
+    for (var key in value1) {
+      form.append(key, value1[key]);
+    }
+    fetch(`http://localhost/api/v1/jwt-auth/v1/token`, {
+      method: 'POST',
+      body: form,
+    }).then(t => t.json()).then(data => {
+      document.querySelector('[name="token"').value = data.data.token
+    })
+
+    const routes = {
+      'api/v1/user/create': `{
+  "first_name": "Vinícius",
+  "last_name": "Araújo",
+  "username": "obaraujo",
+  "user_pass": "obaraujo",
+  "user_email": "baraujo@stagon.in"
+}`,
+      'api/v1/user/login': `{
+  "username": "obaraujo",
+  "user_pass": "obaraujo"
+}`,
+      'api/v1/user': `{
+  "first_name": "Henrique",
+  "last_name": "Pires",
+  "nickname": "Pires",
+  "user_email": "pires@stagon.in",
+  "display_name": "Henrique Pires",
+  "description": "Ele é o cara do desenvolvimento pessoal!"
+}`,
+      'api/v1/user/pass': `{
+  "user_pass": "obaraujo"
+}`,
+      'api/v1/category/create': `
+{
+  "term": "Mercado",
+  "taxonomy": "category_business",
+  "description": "Isso é um exemplo de categoria criada pela API Seabra Tem",
+  "parent": 0
+}`,
+      'api/v1/category': `{
+  "term_id": 40,
+  "term": "Categoria",
+  "taxonomy": "category_business",
+  "description": "Isso é um exemplo de categoria criada pela API Seabra Tem",
+  "parent": 0
+}`
+    };
+    const select = document.querySelector('#routes')
+    for (let [route, data] of Object.entries(routes)) {
+      select.innerHTML += `<option value="${route}">${route}</option>`
+    }
+    select.addEventListener('change', function () {
+      code.value = routes[select.value]
+    })
+
+    function GET() {
+      document.querySelector('[id="response"').innerHTML = ""
+      const headers = new Headers({
+        "Authorization": `Bearer ${token.value}`
+      });
+      fetch(`http://localhost/${route.value}/${params.value}`, {
+        method: 'GET',
+        headers: headers
+      }).then(t => t.json()).then(data => document.querySelector('[id="response"').innerHTML = JSON.stringify(data, null, 2))
+    }
+    function POST() {
+      document.querySelector('[id="response"').innerHTML = ""
+      const files = input.files
+      const value = JSON.parse(`${code.value}`)
+      const form = new FormData();
+      const headers = new Headers({
+        "Authorization": `Bearer ${token.value}`
+      });
+      for (let i = 0; i < files.length; i++) {
+        form.append(files[i].name, files[i])
+      }
+
+      for (var key in value) {
+        form.append(key, value[key]);
+      }
+      fetch(`http://localhost/${route.value}`, {
+        method: 'POST',
+        body: form,
+        headers: headers
+      }).then(t => t.json()).then(data => document.querySelector('[id="response"').innerHTML = JSON.stringify(data, null, 2))
+
+    }
+
+
+    function PUT() {
+      document.querySelector('[id="response"').innerHTML = ""
+      const files = input.files
+      const value = JSON.parse(`${code.value}`)
+      const form = new FormData();
+      const headers = new Headers({
+        "Authorization": `Bearer ${token.value}`,
+        'Content-Type': 'multipart/form-data'
+      });
+      const options = {
+        headers: new Headers({
+          "Authorization": `Bearer ${token.value}`
+        })
+      }
+      for (let i = 0; i < files.length; i++) {
+        form.append(files[i].name, files[i])
+      }
+
+      for (var key in value) {
+        form.append(key, value[key]);
+      }
+      // fetch(`http://localhost${route.value}`, {
+      //   method: 'POST',
+      //   body: form,
+      //   headers: headers
+      // }).then(t => t.json()).then(data => document.querySelector('[id="response"').innerHTML = JSON.stringify(data, null, 2))
+      axios.put(`http://localhost/${route.value}`, form, options)
+    }
+
+    function DELETE() {
+      const headers = new Headers({
+        "Authorization": `Bearer ${token.value}`
+      });
+      fetch(`http://localhost/${route.value}`, {
+        method: 'DELETE',
+        headers: headers,
+      }).then(t => t.json()).then(data => document.querySelector('[id="response"').innerHTML = JSON.stringify(data, null, 2))
+    }
+  </script>
+</body>
+
+</html>

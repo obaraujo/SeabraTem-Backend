@@ -4,7 +4,6 @@ add_action('jwt_auth_expire', function () {
   return time() + 60 * 60 * 24;
 });
 
-
 add_filter('jwt_auth_whitelist', function ($endpoints) {
   $your_endpoints = [];
 

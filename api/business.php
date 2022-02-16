@@ -15,6 +15,7 @@ class ST_businessAPI
         return is_valid_origin($request);
       }
     ]);
+
     register_rest_route('v1', '/business', [
       'methods' => WP_REST_Server::EDITABLE,
       'callback' =>  [$this, 'update'],
@@ -22,6 +23,7 @@ class ST_businessAPI
         return is_valid_origin($request);
       }
     ]);
+
     register_rest_route('v1', '/business/pass', [
       'methods' => WP_REST_Server::EDITABLE,
       'callback' =>  [$this, 'update_pass'],
@@ -29,6 +31,7 @@ class ST_businessAPI
         return is_valid_origin($request);
       }
     ]);
+
     register_rest_route('v1', '/business', [
       'methods' => WP_REST_Server::READABLE,
       'callback' =>  [$this, 'get'],
@@ -36,6 +39,7 @@ class ST_businessAPI
         return is_valid_origin($request);
       }
     ]);
+
     register_rest_route('v1', '/business', [
       'methods' => WP_REST_Server::DELETABLE,
       'callback' =>  [$this, 'delete'],

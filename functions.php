@@ -1,7 +1,7 @@
 <?php
 function is_valid_origin()
 {
-  $server_names_permitted = ['seabratem.com', 'localhost', '127.0.0.1', '192.168.2.107', 'api.stagon.in'];
+  $server_names_permitted = ['seabratem.com', 'localhost', '127.0.0.1', '192.168.2.102', 'api.stagon.in'];
   return in_array($_SERVER['SERVER_NAME'], $server_names_permitted);
 }
 

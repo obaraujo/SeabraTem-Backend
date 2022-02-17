@@ -159,6 +159,7 @@ class ST_users
 
     return $this->st_get_login_user($username, $password);
   }
+
   public function st_get_informations_user($request)
   {
     $user = wp_get_current_user();

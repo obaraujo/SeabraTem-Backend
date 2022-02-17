@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS `st_categories` (
+  `ID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `ID_user` BIGINT(20) NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  `slug` VARCHAR(50) NOT NULL,
+  `taxonomy` VARCHAR(100) NOT NULL,
+  `description` TEXT(300),
+  `count_used` BIGINT(20),
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (`ID_user`) REFERENCES `st_users`(ID) ON DELETE CASCADE ON UPDATE CASCADE
+);

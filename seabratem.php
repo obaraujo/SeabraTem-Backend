@@ -92,7 +92,6 @@ if (!class_exists('SeabraTemBackend')) {
         }
         $counter++;
       }
-      // update_option('st_db_version', $query);
       $wpdb->query($query);
     }
     public static function uninstall()

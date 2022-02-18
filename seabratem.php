@@ -23,12 +23,7 @@
 if (!defined('ABSPATH')) {
   exit;
 }
-
 require_once(plugin_dir_path(__FILE__) . 'core/business.php');
-require_once(plugin_dir_path(__FILE__) . 'core/products.php');
-require_once(plugin_dir_path(__FILE__) . 'core/categories.php');
-require_once(plugin_dir_path(__FILE__) . 'core/ratings.php');
-require_once(plugin_dir_path(__FILE__) . 'core/user.php');
 
 if (!class_exists('SeabraTemBackend')) {
   class SeabraTemBackend
@@ -62,20 +57,10 @@ if (!class_exists('SeabraTemBackend')) {
     public static function activate()
     {
       update_option('rewrite_rules', '');
-
+      // require_once(ST_PATH . 'core/business.php');
       $ST_business = new ST_business();
-      $ST_users = new ST_user();
-      $ST_products = new ST_products();
-      $ST_categories = new ST_categories();
-      $ST_ratings = new ST_ratings();
-
-      $ST_ratings->create_table_ratings();
-      $ST_categories->create_table_categories();
-      $ST_users->create_table_users();
       $ST_business->create_table_business();
-      $ST_products->create_table_products();
     }
-
     public static function deativate()
     {
       flush_rewrite_rules();

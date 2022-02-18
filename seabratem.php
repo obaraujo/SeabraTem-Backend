@@ -59,7 +59,7 @@ if (!class_exists('SeabraTemBackend')) {
       define('ST_URL', plugin_dir_url(__FILE__));
     }
 
-    public function activate()
+    public static function activate()
     {
       update_option('rewrite_rules', '');
 

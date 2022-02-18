@@ -32,8 +32,8 @@ class ST_ratings
         `deslikes` BIGINT(20) UNSIGNED,
         `is_response` BOOLEAN NOT NULL,
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}_users`(ID) ON DELETE CASCADE ON UPDATE CASCADE,
-        FOREIGN KEY (`ID_post`) REFERENCES `{$prefix_wp}_posts`(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}users`(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (`ID_post`) REFERENCES `{$prefix_wp}posts`(ID) ON DELETE CASCADE ON UPDATE CASCADE
       ) $charset_collate;";
       dbDelta($query);
     }

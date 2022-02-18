@@ -28,7 +28,7 @@ class ST_categories
         `description` TEXT(300) DEFAULT '',
         `count_used` BIGINT(20),
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}_users`(ID) ON DELETE CASCADE ON UPDATE CASCADE
+        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}users`(ID) ON DELETE CASCADE ON UPDATE CASCADE
       ) $charset_collate;";
       dbDelta($query);
     }

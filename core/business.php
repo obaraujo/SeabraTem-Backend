@@ -74,7 +74,7 @@ class ST_business
         `longitude` DECIMAL DEFAULT NULL,
         `content` TEXT DEFAULT NULL,
         FOREIGN KEY (`ID_post`) REFERENCES `{$prefix_wp}posts`(`ID`),
-        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}users`(`ID`)
+        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}users`(`ID`),
         FOREIGN KEY (`ID_category`) REFERENCES `{$seabratem_table_names['categories']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
       ) $charset_collate;";
       dbDelta($query);
@@ -125,7 +125,7 @@ class ST_business
 
       dbDelta($query);
 
-      update_option('st_db_version', $query);
+      // update_option('st_db_version', $query);
     }
   }
 }

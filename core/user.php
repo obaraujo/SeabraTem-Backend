@@ -44,7 +44,7 @@ class ST_user
         `capacities` TEXT(300) NOT NULL DEFAULT '',
         `is_active` BOOLEAN NOT NULL,
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}_users`(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}users`(ID) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (`ID_plan`) REFERENCES `{$seabratem_table_names['plans']}`(ID) ON DELETE CASCADE ON UPDATE CASCADE
       ) $charset_collate;";
       dbDelta($query);
@@ -64,19 +64,19 @@ class ST_user
         `have_plan` BOOLEAN,
         `ID_plan` BIGINT(20) UNSIGNED,
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`ID_wp_user`) REFERENCES `{$prefix_wp}_users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (`ID_wp_user`) REFERENCES `{$prefix_wp}users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY (`ID_plan`) REFERENCES `{$seabratem_table_names['plans_relationship']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
       ) $charset_collate;";
       dbDelta($query);
 
-      $query = "CREATE TABLE IF NOT EXISTS `{$seabratem_table_names['analytics_session']}` (
+      $query = "CREATE TABLE IF NOT EXISTS `{$seabratem_table_names['analytics_sessions']}` (
         `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         `ID_user` BIGINT(20) UNSIGNED NOT NULL,
         `date` DATE NOT NULL,
         `time` TIME NOT NULL,
         `device` TEXT NOT NULL DEFAULT '',
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}_users`(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}users`(ID) ON DELETE CASCADE ON UPDATE CASCADE
       ) $charset_collate;";
       dbDelta($query);
     }

@@ -50,9 +50,9 @@ class ST_products
         `is_variation` BOOLEAN,
         `is_active` BOOLEAN,
         PRIMARY KEY(`ID`),
-        FOREIGN KEY(`ID_category`) REFERENCES `{$seabratem_table_names['categaries']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY(`ID_category`) REFERENCES `{$seabratem_table_names['categories']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY(`ID_business`) REFERENCES `{$seabratem_table_names['business']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
-        FOREIGN KEY(`ID_user`) REFERENCES `{$prefix_wp}_users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
+        FOREIGN KEY(`ID_user`) REFERENCES `{$prefix_wp}users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
       ) $charset_collate;";
       dbDelta($query);
 
@@ -66,10 +66,11 @@ class ST_products
         `final_price` DECIMAL(7, 2),
         `ID_business` BIGINT(20) UNSIGNED NOT NULL,
         PRIMARY KEY(`ID`),
-        FOREIGN KEY(`ID_user_buyer`) REFERENCES `{$prefix_wp}_users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
-        FOREIGN KEY(`ID_business`) REFERENCES `{$prefix_wp}_posts`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
+        FOREIGN KEY(`ID_user_buyer`) REFERENCES `{$prefix_wp}users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY(`ID_business`) REFERENCES `{$prefix_wp}posts`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
       ) $charset_collate;";
       dbDelta($query);
+      update_option('st_db_version', $query);
 
       $query = "CREATE TABLE IF NOT EXISTS `{$seabratem_table_names['analytics_product_views']}` (
         `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -80,7 +81,7 @@ class ST_products
         `duration` BIGINT(20) UNSIGNED NOT NULL,
         PRIMARY KEY(`ID`),
         FOREIGN KEY(`ID_post`) REFERENCES `{$seabratem_table_names['products']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
-        FOREIGN KEY(`ID_user`) REFERENCES `{$prefix_up}_users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
+        FOREIGN KEY(`ID_user`) REFERENCES `{$prefix_wp}users`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
       ) $charset_collate;";
       dbDelta($query);
 

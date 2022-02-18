@@ -20,7 +20,7 @@ function generete_table_name()
     "plans" => $table_prefix . "plans",
     "plans_relationship" => $table_prefix . "plans_relationship",
     "users" => $table_prefix . "users",
-    "analytics_session" => $table_prefix . "analytics_session",
+    "analytics_sessions" => $table_prefix . "analytics_sessions",
   ];
 
   return $table_names;

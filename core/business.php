@@ -75,7 +75,7 @@ class ST_business
         `content` TEXT DEFAULT NULL,
         FOREIGN KEY (`ID_post`) REFERENCES `{$prefix_wp}posts`(`ID`),
         FOREIGN KEY (`ID_user`) REFERENCES `{$prefix_wp}users`(`ID`)
-        -- FOREIGN KEY (`ID_category`) REFERENCES `{$seabratem_table_names['categories']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
+        FOREIGN KEY (`ID_category`) REFERENCES `{$seabratem_table_names['categories']}`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
       ) $charset_collate;";
       dbDelta($query);
 

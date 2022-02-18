@@ -23,6 +23,7 @@
 if (!defined('ABSPATH')) {
   exit;
 }
+require_once(plugin_dir_path(__FILE__) . 'core/business.php');
 
 if (!class_exists('SeabraTemBackend')) {
   class SeabraTemBackend
@@ -35,9 +36,9 @@ if (!class_exists('SeabraTemBackend')) {
       require_once(ST_PATH . 'functions/category.php');
       require_once(ST_PATH . 'functions/business.php');
       require_once(ST_PATH . 'functions/product.php');
+      require_once(ST_PATH . 'functions/st-db.php');
       require_once(ST_PATH . 'core/products.php');
       $ST_Products = new ST_products();
-      require_once(ST_PATH . 'core/business.php');
       $ST_business = new ST_business();
       require_once(ST_PATH . 'api/users.php');
       $ST_users = new ST_users();
@@ -53,9 +54,12 @@ if (!class_exists('SeabraTemBackend')) {
       define('ST_URL', plugin_dir_url(__FILE__));
     }
 
-    public static function activate()
+    public function activate()
     {
       update_option('rewrite_rules', '');
+      // require_once(ST_PATH . 'core/business.php');
+      $ST_business = new ST_business();
+      $ST_business->create_table_business();
     }
     public static function deativate()
     {

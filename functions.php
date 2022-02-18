@@ -55,7 +55,8 @@ function register_routes_api_tests()
   register_rest_route('v1', '/tests', [
     'methods' => WP_REST_Server::READABLE,
     'callback' => function ($request) {
-      return rest_ensure_response($_SERVER);
+      $response = "`Vai{$_SERVER['REQUEST_URI']}`";
+      return rest_ensure_response($response);
     },
     'permission_callback' => function () {
       return is_valid_origin();

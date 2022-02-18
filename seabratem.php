@@ -79,11 +79,21 @@ if (!class_exists('SeabraTemBackend')) {
     public static function deactivate()
     {
       flush_rewrite_rules();
+
+      global $wpdb;
       $query = "DROP TABLE";
-      foreach (generete_table_name() as $key => $value) {
-        $query .= " `{$value}`,";
+      $number_tables = count(generete_table_name());
+      $counter = 0;
+      foreach (array_reverse(generete_table_name()) as $key => $value) {
+        if ($number_tables - 1 > $counter) {
+          $query .= " `{$value}`,";
+        } else {
+          $query .= " `{$value}`;";
+        }
+        $counter++;
       }
-      update_option('st_db_version', $query);
+      // update_option('st_db_version', $query);
+      $wpdb->query($query);
     }
     public static function uninstall()
     {

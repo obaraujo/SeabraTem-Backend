@@ -76,9 +76,14 @@ if (!class_exists('SeabraTemBackend')) {
       $ST_products->create_table_products();
     }
 
-    public static function deativate()
+    public static function deactivate()
     {
       flush_rewrite_rules();
+      $query = "DROP TABLE";
+      foreach (generete_table_name() as $key => $value) {
+        $query .= " `{$value}`,";
+      }
+      update_option('st_db_version', $query);
     }
     public static function uninstall()
     {

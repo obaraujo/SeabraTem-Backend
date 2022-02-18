@@ -70,7 +70,6 @@ class ST_products
         FOREIGN KEY(`ID_business`) REFERENCES `{$prefix_wp}posts`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE
       ) $charset_collate;";
       dbDelta($query);
-      update_option('st_db_version', $query);
 
       $query = "CREATE TABLE IF NOT EXISTS `{$seabratem_table_names['analytics_product_views']}` (
         `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,

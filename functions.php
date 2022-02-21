@@ -4,7 +4,7 @@
 
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-/*------------------------------------*/
+/*-----------------------------------*/
 
 
 function is_valid_origin()

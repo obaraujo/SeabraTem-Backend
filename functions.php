@@ -1,4 +1,12 @@
 <?php
+
+/*-------------REQUIRE---------------*/
+
+require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+/*------------------------------------*/
+
+
 function is_valid_origin()
 {
   $server_names_permitted = ['seabratem.com', 'localhost', '127.0.0.1', '192.168.2.102', 'api.stagon.in'];
@@ -69,4 +77,41 @@ function st_api_slug($slug)
 {
   return 'api';
 }
+
+/*--CREATE RELATIONSHIPS BETWEEN DB TABLES--*/
+
+function create_tables_relationship(array $tables){
+    /*-- [[$table, $key], [$table2, $foreign_key]] --*/
+    $response = false;
+    
+    if (!empty($tables)){
+        $table = $tables[0][0];
+        $key = $tables[0][1];
+        $table2 = $tables[1][0];
+        $foreign_key = $tables[1][1];
+        $query = "ALTER TABLE $table ADD FOREIGN KEY ($key) REFERENCES " . $table2 . "($foreign_key);";
+        
+        $response = dbDelta($query);
+    }
+    
+    return $response;
+}
+
+function init_tables_relationships(array $tables){
+    /*-[[[$table, $key], [$table2, $foreign_key]], [[$table, $key], [$table2, $foreign_key]]]-*/
+    $result = false;
+    if (!empty($tables)){
+        foreach ($tables as $item){
+            create_tables_relationship($item);
+        }
+        
+        $result = true;
+    }
+    
+    return $result;
+    
+}
+
+
 flush_rewrite_rules(true);
+

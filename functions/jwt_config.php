@@ -15,7 +15,7 @@ add_filter('jwt_auth_default_whitelist', function ($default_whitelist) {
     // ...$default_whitelist,
     '/api/v1/user/create',
     '/api/v1/user/login',
-    '/api/v1/tests',
+    '/api/v1/tests'
   ];
   return $default_whitelist;
 });

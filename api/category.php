@@ -5,7 +5,7 @@ class ST_categoryAPI
   {
     add_action('rest_api_init', [$this, 'register_routes_api_category']);
   }
-
+    
   public function register_routes_api_category()
   {
     register_rest_route('v1', '/category/create', [
